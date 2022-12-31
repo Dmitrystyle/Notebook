@@ -1,17 +1,17 @@
 package com.example.notebook.data
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
+import androidx.room.*
 import androidx.room.Room.databaseBuilder
-import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.notebook.data.dao.DAO
 import com.example.notebook.model.Model
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.SynchronizedObject
 
 
-@Database(entities = [Model::class], version = 1)
+@Database(entities = [Model::class], version = 2, exportSchema = false)
 
 abstract class NoteDatabase: RoomDatabase() {
 
@@ -19,23 +19,37 @@ abstract class NoteDatabase: RoomDatabase() {
 
 
     companion object{
+
+        val MIGRATION1_2 = object : Migration(1,2){
+                override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE note_table  ADD COLUMN time1 INTEGER NOT NULL DEFAULT(1)")
+            }
+        }
+
+
+
         private var database: NoteDatabase ?=null
 
         @Synchronized
          fun getInstance(context:Context):NoteDatabase {
            return if (database == null) {
-                database = databaseBuilder(context, NoteDatabase::class.java, "db").build()
+                database = databaseBuilder(context, NoteDatabase::class.java, "db")
+                    .addMigrations(MIGRATION1_2)
+                    .build()
                 database as NoteDatabase
            }
 
            else
                 {
-                    database as NoteDatabase}
+                    database as NoteDatabase }
 
         }
     }
 
 
 }
+
+
+
 
 

@@ -13,6 +13,9 @@ import java.util.Collections.emptyList
 class Adapter: RecyclerView.Adapter<Adapter.ViewHolder>(){
     class ViewHolder(view:View):RecyclerView.ViewHolder(view){
         var itemT: TextView =itemView.findViewById(R.id.itemText1)
+        var itemT1: TextView =itemView.findViewById(R.id.textViewDatail)
+
+
     }
     private var listNote = emptyList<Model>()
 
@@ -29,6 +32,8 @@ class Adapter: RecyclerView.Adapter<Adapter.ViewHolder>(){
 
         //привязка к сожержимому полей и нажатия по панели
         holder.itemT.text = listNote[position].title
+        holder.itemT1.text=listNote[position].discription
+
 
         // holder.itemView.setOnClickListener{ Toast.makeText(context, "${userList[position].lastname}", Toast.LENGTH_SHORT).show()}
 

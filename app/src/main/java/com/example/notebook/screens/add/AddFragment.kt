@@ -37,8 +37,9 @@ class AddFragment : Fragment() {
             //получаем данные со строк
            val titleText = binding.editTextTextPersonName.text.toString()
             val descriptionText = binding.editTextTextPersonName2.text.toString()
+            //val time1=binding.editTextTime.t
 
-        viewModel.insert(Model(title = titleText, discription = descriptionText)){}
+        viewModel.insert(Model(title = titleText, discription = descriptionText, time1 = 4)){}
             APP.navController.navigate(R.id.action_addFragment_to_startFragment)
         }
         binding.btnBack.setOnClickListener{
