@@ -1,22 +1,29 @@
 package com.example.notebook.screens.add
 
+import android.app.TimePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TimePicker
 import androidx.lifecycle.ViewModelProvider
 import com.example.notebook.APP
 import com.example.notebook.R
+import com.example.notebook.data.dataPicker.DatePickerFragment
 import com.example.notebook.databinding.FragmentAddBinding
 import com.example.notebook.databinding.FragmentStartBinding
 import com.example.notebook.model.Model
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class AddFragment : Fragment() {
 
     lateinit var binding:FragmentAddBinding
 
+    private var selectedHour = 0
+    private var selectedMinute = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +31,7 @@ class AddFragment : Fragment() {
     ): View? {
         binding= FragmentAddBinding.inflate(layoutInflater, container,false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,6 +41,8 @@ class AddFragment : Fragment() {
 
     private fun init() {
         val viewModel = ViewModelProvider(this).get(AddViewModel::class.java)
+
+
         binding.btnAdd.setOnClickListener{
             //получаем данные со строк
            val titleText = binding.editTextTextPersonName.text.toString()
@@ -45,5 +55,30 @@ class AddFragment : Fragment() {
         binding.btnBack.setOnClickListener{
             APP.navController.navigate(R.id.action_addFragment_to_startFragment)
             }
+
+
+        binding.btnEditTime.setOnClickListener{
+            val datePickerFragment = DatePickerFragment()
+            val supportFragmentManager = requireActivity().supportFragmentManager
+            // show
+            datePickerFragment.show(supportFragmentManager, "DatePickerFragment")
+        }
+
+
+        val supportFragmentManager = requireActivity().supportFragmentManager
+
+        // we have to implement setFragmentResultListener
+        supportFragmentManager.setFragmentResultListener(
+            "REQUEST_KEY",
+            viewLifecycleOwner
+        ) { resultKey, bundle ->
+            if (resultKey == "REQUEST_KEY") {
+                val date = bundle.getString("SELECTED_DATE")
+
+                binding.textTimeFirst.text=date
+            }
+        }
+
     }
+
 }
