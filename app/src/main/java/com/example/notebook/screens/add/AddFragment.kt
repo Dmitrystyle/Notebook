@@ -22,8 +22,8 @@ class AddFragment : Fragment() {
 
     lateinit var binding:FragmentAddBinding
 
-    private var selectedHour = 0
-    private var selectedMinute = 0
+    private var descriptionText = ""
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,19 +43,7 @@ class AddFragment : Fragment() {
         val viewModel = ViewModelProvider(this).get(AddViewModel::class.java)
 
 
-        binding.btnAdd.setOnClickListener{
-            //получаем данные со строк
-           val titleText = binding.editTextTextPersonName.text.toString()
-            val descriptionText = binding.editTextTextPersonName2.text.toString()
-            //val time1=binding.editTextTime.t
-
-        viewModel.insert(Model(title = titleText, discription = descriptionText, time1 = 4)){}
-            APP.navController.navigate(R.id.action_addFragment_to_startFragment)
-        }
-        binding.btnBack.setOnClickListener{
-            APP.navController.navigate(R.id.action_addFragment_to_startFragment)
-            }
-
+//_________данные о времени____________
 
         binding.btnEditTime.setOnClickListener{
             val datePickerFragment = DatePickerFragment()
@@ -74,10 +62,28 @@ class AddFragment : Fragment() {
         ) { resultKey, bundle ->
             if (resultKey == "REQUEST_KEY") {
                 val date = bundle.getString("SELECTED_DATE")
-
-                binding.textTimeFirst.text=date
+                descriptionText=date.toString()
             }
         }
+
+        //__________передача_______
+
+        binding.btnAdd.setOnClickListener{
+            //получаем данные со строк
+            val titleText = binding.editTextTextPersonName.text.toString()
+            //val descriptionText = binding.editTextTextPersonName2.text.toString()
+
+
+            viewModel.insert(Model(title = titleText, discription = descriptionText, time1 = 4, dataTime="hgf")){}
+            APP.navController.navigate(R.id.action_addFragment_to_startFragment)
+        }
+        binding.btnBack.setOnClickListener{
+            APP.navController.navigate(R.id.action_addFragment_to_startFragment)
+        }
+
+
+
+
 
     }
 

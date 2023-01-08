@@ -14,6 +14,8 @@ class Adapter: RecyclerView.Adapter<Adapter.ViewHolder>(){
     class ViewHolder(view:View):RecyclerView.ViewHolder(view){
         var itemT: TextView =itemView.findViewById(R.id.itemText1)
         var itemT1: TextView =itemView.findViewById(R.id.textViewDatail)
+        val itemT2: TextView =itemView.findViewById(R.id.textViewTime)
+
 
 
     }
@@ -33,6 +35,7 @@ class Adapter: RecyclerView.Adapter<Adapter.ViewHolder>(){
         //привязка к сожержимому полей и нажатия по панели
         holder.itemT.text = listNote[position].title
         holder.itemT1.text=listNote[position].discription
+        holder.itemT2.text= listNote[position].time1.toString()
 
 
         // holder.itemView.setOnClickListener{ Toast.makeText(context, "${userList[position].lastname}", Toast.LENGTH_SHORT).show()}

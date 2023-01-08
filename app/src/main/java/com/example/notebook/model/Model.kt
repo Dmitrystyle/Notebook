@@ -26,6 +26,8 @@ class Model (
     @ColumnInfo()
     var time1:Int,
 
+    @ColumnInfo()
+    var dataTime:String="",
 
 ) : Serializable
 

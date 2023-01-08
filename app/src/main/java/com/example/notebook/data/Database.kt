@@ -11,7 +11,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.SynchronizedObject
 
 
-@Database(entities = [Model::class], version = 2, exportSchema = false)
+@Database(entities = [Model::class], version = 3, exportSchema = false)
 
 abstract class NoteDatabase: RoomDatabase() {
 
@@ -26,6 +26,12 @@ abstract class NoteDatabase: RoomDatabase() {
             }
         }
 
+        val MIGRATION2_3 = object : Migration(2,3){
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE note_table  ADD COLUMN dataTime TEXT NOT NULL DEFAULT(1)")
+            }
+        }
+
 
 
         private var database: NoteDatabase ?=null
@@ -34,7 +40,7 @@ abstract class NoteDatabase: RoomDatabase() {
          fun getInstance(context:Context):NoteDatabase {
            return if (database == null) {
                 database = databaseBuilder(context, NoteDatabase::class.java, "db")
-                    .addMigrations(MIGRATION1_2)
+                    .addMigrations(MIGRATION1_2,MIGRATION2_3)
                     .build()
                 database as NoteDatabase
            }
