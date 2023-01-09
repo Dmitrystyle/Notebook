@@ -29,5 +29,8 @@ class Model (
     @ColumnInfo()
     var dataTime:String="",
 
+    @ColumnInfo()
+    var dataTimeHourMin:String="",
+
 ) : Serializable
 

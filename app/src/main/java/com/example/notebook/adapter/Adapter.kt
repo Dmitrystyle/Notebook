@@ -12,9 +12,9 @@ import java.util.Collections.emptyList
 
 class Adapter: RecyclerView.Adapter<Adapter.ViewHolder>(){
     class ViewHolder(view:View):RecyclerView.ViewHolder(view){
-        var itemT: TextView =itemView.findViewById(R.id.itemText1)
-        var itemT1: TextView =itemView.findViewById(R.id.textViewDatail)
-        val itemT2: TextView =itemView.findViewById(R.id.textViewTime)
+        var itemTitle: TextView =itemView.findViewById(R.id.itemText1)
+        var itemTime: TextView =itemView.findViewById(R.id.textTime)
+        val itemDate: TextView =itemView.findViewById(R.id.textDate)
 
 
 
@@ -33,9 +33,9 @@ class Adapter: RecyclerView.Adapter<Adapter.ViewHolder>(){
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         //привязка к сожержимому полей и нажатия по панели
-        holder.itemT.text = listNote[position].title
-        holder.itemT1.text=listNote[position].discription
-        holder.itemT2.text= listNote[position].time1.toString()
+        holder.itemTitle.text = listNote[position].title
+        holder.itemTime.text=listNote[position].dataTimeHourMin
+        holder.itemDate.text= listNote[position].dataTime
 
 
         // holder.itemView.setOnClickListener{ Toast.makeText(context, "${userList[position].lastname}", Toast.LENGTH_SHORT).show()}

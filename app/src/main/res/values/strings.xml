@@ -2,4 +2,12 @@
     <string name="app_name">Notebook</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="DELET">DELET</string>
+    <string name="BACK">BACK</string>
+    <string name="Title">Title</string>
+    <string name="Discription">Discription</string>
+    <string name="SET_DATE">SET DATE</string>
+    <string name="SET_TIME">SET_TIME</string>
+    <string name="Add_note">Add note</string>
+    <string name="ADD">ADD</string>
 </resources>

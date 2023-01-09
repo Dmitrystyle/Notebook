@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notebook</string>
+    <string name="DELET">УДАЛИТЬ</string>
+    <string name="BACK">НАЗАД</string>
+    <string name="Title">Тема</string>
+    <string name="Discription">Описание</string>
+    <string name="SET_DATE">Дата события</string>
+    <string name="SET_TIME">Время собятия</string>
+    <string name="Add_note">Добавить заметку</string>
+    <string name="ADD">ДОБАВИТЬ</string>
+</resources>
